@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="js/lodash.min.js"></script>
+    <script src="js/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="pure-min.css"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      #doclist li:hover {
+          background: #EEE;
+      }
+
+      #doclist ul {
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          padding: 0.5em;
+          height: 33em;
+      }
+      #doclist li {
+         list-style-type: none;
+         margin: 0;
+         padding: 0;
+         width: 4em;
+                    }
+      #doclist li.selected {
+         background: #FFCCFF;
+                    }
+      svg {
+        border: 3px solid rgba(255,196,255,0.2);
+      }
+
+      svg circle {
+                   fill: #88FF88; 
+                   stroke: #555;
+                   opacity: 0.5;
+                   pointer-events: all
+
+                   }
+
+      svg path {
+               stroke: #FFAAAA;
+               stroke-width: 1px;
+      }
+
+      body {
+             margin: 0px 20px;
+      }
+      h1, h2 {
+             margin: 0.25em 0;
+      }
+    </style>
+    <style id="docstyle"></style>
+  </head>
+  
+  <body class="pure-g">
+   <h1 class="pure-u-1">Inaugurals TF-IDF</h1>
+   <h2 class="pure-u-1" id="selectiontitle">Select</h2>
+   <div id="nav" class="pure-u-1-8">
+     <div id="doclist"><ul></ul></div>
+     <!--
+         <input id="termpattern"></input>
+         -->
+     <div id="message"></div>
+   </div>
+
+   
+
+   <div class="graphs pure-u-5-8">
+     <svg id="tfidfscatter" width="750" height="570">
+       <g id="plot"></g>
+       <g id="tooltip"></g>
+       <g id="fixedlabels">
+         <text x="50" y="550">Term Count</text>
+         <text x="300" y="550">more frequent in this doc →</text>
+         <text x="15" y="500" transform="rotate(270 15 500)">Inverse Document Frequency</text>
+         <text x="15" y="180" transform="rotate(270 15 180)">in fewer docs →</text>
+       </g>
+     </svg>
+     
+   </div>
+   
+   <div id="wordlist" class="pure-u-1-8"></div>
+   
+   <div id="about" class="pure-u-1-3">
+ 
+     
+     <p>This exploratory tool graphs words from presidential inaugurals
+       according to their frequency in each work and across the whole
+       corpus.</p>
+     
+     <p>The vertical axis represents inverse document frequency on a
+       log scale, so words in all documentsd) are always on the bottom
+       row; words that appear only in the current document are always
+       on the top row. The horizontal axis represents term frequency
+       in the current document, also on a log scale. When changing
+       from one document to another words may appear or disappear, and
+       may move right or left, but they will always be at essentially
+       the same height, because that value is determined by the corpus
+       rather than the document. (For the sake of clarity, however,
+       circles and labels are randomly jittered just a little.)</p>
+     
+     <p><a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>
+       is a calculation sometimes used in information retrieval that
+       ranks words in a document highly when they are both frequent in
+       a document and appear in relatively few other documents in the
+       corpus. Conventionally TF-IDF assigns each word a single score,
+       but this scatterplot separates out the two parts of the
+       calculation to plot all terms in two dimensions. Words with the
+       highest TF-IDF scores appear at the upper right. </p>
+
+     <p>A faint diagonal line shows the slope of relations of TF-IDF
+       equivalency. Words with higher TF-IDF scores can found above
+       and to the right of the line, wherever it is.
+     </p>
+     
+     <script src="js/doctfidf.js"></script> 
+  </body> 
+</html>
